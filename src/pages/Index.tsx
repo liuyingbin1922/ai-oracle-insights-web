@@ -1,13 +1,30 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import Layout from '../components/layout/Layout';
+import Hero from '../components/home/Hero';
+import FeaturedTools from '../components/home/FeaturedTools';
+import BlogPreview from '../components/home/BlogPreview';
+import CTASection from '../components/home/CTASection';
+import { Helmet } from 'react-helmet';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
+  const { language } = useLanguage();
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <Layout>
+      <Helmet>
+        <html lang={language} />
+        <title>Celestial Fortune - AI Fortune Telling</title>
+        <meta name="description" content="Discover your destiny with Celestial Fortune's AI-powered fortune telling tools. Get personalized insights into your future through our advanced AI technology." />
+        <meta name="keywords" content="AI fortune telling, tarot reading, horoscope, palmistry, numerology, divination, future prediction" />
+      </Helmet>
+      
+      <Hero />
+      <FeaturedTools />
+      <BlogPreview />
+      <CTASection />
+    </Layout>
   );
 };
 
