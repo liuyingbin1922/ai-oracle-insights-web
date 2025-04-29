@@ -1,11 +1,10 @@
-
 import React from 'react';
 import Layout from '../components/layout/Layout';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const Blog = () => {
   const { t, language } = useLanguage();
@@ -68,56 +67,58 @@ const Blog = () => {
   ];
   
   return (
-    <Layout>
-      <Helmet>
-        <html lang={language} />
-        <title>Blog - Celestial Fortune</title>
-        <meta name="description" content="Explore articles on fortune telling, divination practices, astrology, tarot reading, and the intersection of ancient wisdom with modern AI technology." />
-        <meta name="keywords" content="fortune telling blog, divination articles, astrology guides, tarot reading tips" />
-      </Helmet>
-      
-      <div className="pt-10 pb-20">
-        <div className="container mx-auto px-4">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-center">
-            {t('blog')}
-          </h1>
-          <p className="text-lg mb-12 text-center max-w-3xl mx-auto">
-            Explore our articles on fortune telling, divination practices, and the intersection of ancient wisdom with modern AI technology.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => (
-              <Card key={article.id} className="border border-border hover:border-mystic-300 transition-all duration-300">
-                <div className="h-48 overflow-hidden">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                </div>
-                <CardHeader className="pb-2">
-                  <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
-                    <span>{article.category}</span>
-                    <span>{article.date}</span>
+    <HelmetProvider>
+      <Layout>
+        <Helmet>
+          <html lang={language} />
+          <title>Blog - Celestial Fortune</title>
+          <meta name="description" content="Explore articles on fortune telling, divination practices, astrology, tarot reading, and the intersection of ancient wisdom with modern AI technology." />
+          <meta name="keywords" content="fortune telling blog, divination articles, astrology guides, tarot reading tips" />
+        </Helmet>
+        
+        <div className="pt-10 pb-20">
+          <div className="container mx-auto px-4">
+            <h1 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-center">
+              {t('blog')}
+            </h1>
+            <p className="text-lg mb-12 text-center max-w-3xl mx-auto">
+              Explore our articles on fortune telling, divination practices, and the intersection of ancient wisdom with modern AI technology.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {articles.map((article) => (
+                <Card key={article.id} className="border border-border hover:border-mystic-300 transition-all duration-300">
+                  <div className="h-48 overflow-hidden">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
                   </div>
-                  <h3 className="font-serif text-xl font-semibold">{article.title}</h3>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  <p>{article.excerpt}</p>
-                </CardContent>
-                <CardFooter>
-                  <Link to={`/blog/${article.slug}`} className="w-full">
-                    <Button variant="link" className="text-mystic-600 hover:text-mystic-800 p-0">
-                      {t('readMore')}
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
-            ))}
+                  <CardHeader className="pb-2">
+                    <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
+                      <span>{article.category}</span>
+                      <span>{article.date}</span>
+                    </div>
+                    <h3 className="font-serif text-xl font-semibold">{article.title}</h3>
+                  </CardHeader>
+                  <CardContent className="text-sm text-muted-foreground">
+                    <p>{article.excerpt}</p>
+                  </CardContent>
+                  <CardFooter>
+                    <Link to={`/blog/${article.slug}`} className="w-full">
+                      <Button variant="link" className="text-mystic-600 hover:text-mystic-800 p-0">
+                        {t('readMore')}
+                      </Button>
+                    </Link>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </HelmetProvider>
   );
 };
 

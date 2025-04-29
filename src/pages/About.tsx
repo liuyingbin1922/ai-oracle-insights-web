@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Layout from '../components/layout/Layout';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const About = () => {
